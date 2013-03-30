@@ -5,6 +5,7 @@
 \usepackage[francais]{babel}
 \usepackage[top=2cm,bottom=2cm,left=3cm,right=2cm]{geometry}
 \usepackage{setspace}
+\usepackage{graphicx}
 
 \title{Introduction à Git et à GitHub}
 \author{Antoine \bsc{Wacheux}}
@@ -56,5 +57,41 @@ Git a été développé en 2005 pour les besoins du noyau Linux. A l'époque l'�
 \end{itemize}
 
 Depuis sa naissance, Git a évolué mais a su également conserver toutes ses qualités qui font de lui un excellent gestionnaire de version.
+
+\section{Fonctionnement global de Git}
+
+Git fonctionne par dépôt. Un dépôt est un ensemble de fichier qui sont suivis par Git. Voici à quoi ressemble un dépôt
+
+\begin{verbatim}
+ls -alh
+
+
+total 216K
+drwxr-xr-x 3 antoine ####### 4,0K 30 mars  17:50 .
+drwxr-xr-x 3 antoine ####### 4,0K 30 mars  12:40 ..
+drwxr-xr-x 8 antoine ####### 4,0K 30 mars  13:26 .git
+-rw-r--r-- 1 antoine #######  211 30 mars  12:49 .gitignore
+-rw-r--r-- 1 antoine #######  781 30 mars  17:50 poly_git.aux
+-rw-r--r-- 1 antoine #######  18K 30 mars  17:50 poly_git.log
+-rw-r--r-- 1 antoine ####### 143K 30 mars  17:50 poly_git.pdf
+-rw-r--r-- 1 antoine #######  16K 30 mars  17:50 poly_git.synctex.gz
+-rw-r--r-- 1 antoine ####### 5,0K 30 mars  17:50 poly_git.tex
+-rw-r--r-- 1 antoine #######  446 30 mars  17:50 poly_git.toc
+-rw-r--r-- 1 antoine #######   70 30 mars  12:49 README.md
+
+\end{verbatim}
+
+Tous les fichiers sont suivis par git. Chacune des modifications qui y sera faites sera automatiquement détectée. Quand les changements son jugés satisfaisants, on les sauvegardes. Git étant un logiciel intelligent, il ne va pas sauvegarder à chaque changement le fichier dans son intégralité, il va juste prendre les portions ont été modifiées, les empaqueter et les compresser. Le paquet ainsi créer s'appelle un commit. Ainsi la version actuel du dépôt correspond à la \og somme \fg des changements apportés par chaque commit.
+
+\begin{figure}[h]
+\centering
+\label{figure_commit}
+\includegraphics[scale=0.25]{commit.png}
+\caption{Processus de création de commit}
+\end{figure}
+
+Ensuite chaque commit est envoyé vers le dépôt centrale, cette opération s'appelle la fusion. Chaque utilisateurs devra ensuite récupérer tout les commits envoyés et les fusionnés avec ça copie du dépôt. Si deux commits modifient la même partie d'un fichier, il y a ce que l'on appel un \textbf{conflit} et c'est à l'utilisateur de le résoudre en indiquant à Git qu'elle version garder.
+
+Le répertoire \emph{.git} contient la liste de tout les commit, les configurations propres au dépôts, les branches, l'adresse du dépôt central. En gros, c'est ce qui permet à git de suivre correctement le projet, il convient donc de ne pas y toucher.
 
 \end{document}
