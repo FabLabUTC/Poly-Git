@@ -24,7 +24,6 @@ Dans ce petit guide, vous trouverez toute les informations nécessaires pour uti
 
 \begin{verbatim}
 // Ceci est un commentaire
-- $ git init // Ceci est un commande à taper en tant qu'utilisateur normal
 - # apt-get install git-core // Ceci est un commande à executer en tant que super-utilisateur 
 (utiliser sudo)
 - git commit -a //Si la commande est donnée telle quelle, elle doit être exécuté en tant 
@@ -42,5 +41,20 @@ qu'utilisateur normal
 Git, prononcé “guite”, est un gestionnaire de version. C'est un logiciel qui permet d'enregistrer toutes les modifications apportées à un ensemble de fichiers. Ainsi il est très aisé de se \og balader dans le temps \fg pour revenir à des versions antérieures. Ce genre de logiciel est particulièrement utile pour la gestion de projet impliquant plusieurs personnes, car il permet de gérer automatiquement toutes les modifications apportées par l'ensemble de l'équipe et de maintenir une version à jour chez chacun de ses membres. Mais, c'est encore plus puissant, car il permet de très facilement identifier et de supprimer les modifications causant une instabilité dans le projet. Il est également très utile d'utiliser un gestionnaire de version sur un projet personnel, j'entends par-là un projet ou l'on est seul à travailler, car même sur ce genre de projet il peut être utile de revenir facilement à des versions plus stables, le tout sans risque de se tromper en enlevant les modifications.
 
 Maintenant ce pose la question : Pourquoi Git ? En effet, il existe plusieurs gestionnaires de versions libre et gratuit autre que git. On peut ainsi citer Mercurial, Bazar ou Subversion. Eh bien Git possède plusieurs avantages. Le premier est qu'il s'agit d'un logiciel récent, il date de 2005. De ce fait il ne possède pas nombre des défauts de ses concurrents. Ensuite, il est rapide, bien plus rapide que Subversion ou CVS par exemple. Et il est décentralisé. C'est-à-dire qu'il n'a pas besoin d'un serveur central pour héberger le projet entier. Il est capable de se connecter à chaque ordinateur de chaque membre d'une équipe pour récupérer les dernières modifications. Cependant, nous l'utiliserons ici que de manière centralisée pour faciliter la gestion des projets.
+
+\subsection{Un bref historique}
+
+Git a été développé en 2005 pour les besoins du noyau Linux. A l'époque l'équipe du noyau utilisait le gestionnaire de version BitKeeper jusqu'à ce que celui-ci ne soit plus gratuit. L'équipe du noyau Linux a donc décidé de prendre les choses en main en développant son propre gestionnaire de version avec ces propres contraintes. Ce nouveau gestionnaire devait être :
+\begin{itemize}
+
+\item vitesse
+\item conception simple
+\item le support d'un nombre élevé de branches
+\item complètement décentraliser
+\item efficace dans la gestion de gros projet tant au niveau de la rapidité que de la compression des données
+
+\end{itemize}
+
+Depuis sa naissance, Git a évolué mais a su également conserver toutes ses qualités qui font de lui un excellent gestionnaire de version.
 
 \end{document}
