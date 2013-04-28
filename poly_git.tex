@@ -94,4 +94,133 @@ Ensuite chaque commit est envoyé vers le dépôt centrale, cette opération s'a
 
 Le répertoire \emph{.git} contient la liste de tout les commit, les configurations propres au dépôts, les branches, l'adresse du dépôt central. En gros, c'est ce qui permet à git de suivre correctement le projet, il convient donc de ne pas y toucher.
 
+%%TODO : Ajouter la partie sur l'installation
+
+\section{Premier dép\^ot}
+
+Pour apprendre, rien de mieux que d'essayer par sois-même, nous allons donc ici faire un dépôt d'expérimentation, pas à pas, et nous détaillerons chaque commande utilisées.
+
+\subsection{Création du dép\^ot}
+
+Nous souhaitons créer ici un dépôt qui contiendra le texte de votre rapport de stage. Pour cela il faut créer un dossier racine qui sera le répertoire du rapport.
+
+\begin{verbatim}
+mkdir rapport
+cd rapport
+\end{verbatim}
+
+Une fois créer, on va transformer ce répertoire en dépôt Git. Pour cela on utilise la commande :
+
+\begin{verbatim}
+git init
+
+// Résultat
+Initialized empty Git repository in /home/antoine/rapport/.git/
+\end{verbatim}
+
+La commande \emph{git init} va créer le répertoire \emph{.git} et va l'initialiser pour gérer un nouveau dépôt.
+
+\subsection{Le premier commit}
+
+Maintenant que le dépôt est créer, il faut le remplir. Pour cela on créer les fichier normalement comme s'il s'agissait d'un dossier normal. Ensuite on fait ses premières modifications puis viens l'heure du commit. Créez un fichier \emph{rapport.txt} puis ajoutez-y 2-3 lignes.
+
+Voyons maintenant ce que Git à détecter :
+
+\begin{verbatim}
+git status
+
+//Résultat
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	rapport.txt
+nothing added to commit but untracked files present (use "git add" to track)
+\end{verbatim}
+
+Notre fichier rapport.txt a bien été créer, cependant Git ne sait pas quoi faire avec. Il faut lui indiquer que notre rapport doit être ajouté pour commit (traqué). La commande \textbf{git add} permet de faire ça.
+
+\begin{verbatim}
+git add rapport.txt
+
+git status
+
+//Résultat
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#	new file:   rapport.txt
+#
+\end{verbatim}
+
+Le fichier rapport.txt est donc en attente pour être committé. Il n'y a donc plus qu'a créer le commit
+
+\begin{verbatim}
+git commit
+\end{verbatim}
+
+Un éditeur de texte en mode console s'ouvrira alors (vi, vim ou nano). Entrez alors une description du commit, enregistrez et c'est terminé.
+
+\paragraph{Note :}Dans vos nom de commit, entrez des petite phrases simples et évitez les fioritures. Utilisez des verbes conjugués au présent. Exemple : \textit{Corrige l'envoie des weekmails}.
+
+\subsection{Modifier le dep\^ot}
+
+Lorsque l'on travaille avec Git, il y a trois grandes étapes à respecter qui forme un cycle : 
+\begin{itemize}
+\item Modifier le code source
+\item Tester les modifications
+\item Valider les modifications en effectuant un commit
+\end{itemize}
+
+Modifier le code source signifier modifier n'importe quel fichier faisant partie du dép\^ot. Ca peut aussi bien être qu'une ligne changé dans un fichier que 25 dans un fichier A et 510 dans un fichier B. Ce qu'il faut se demander c'est : Est-ce que les modifications que j'effectue me permettent de corriger le bug ou d'ajouter la fonctionnalité dont j'ai besoin.
+
+Faites quelques modifications sur votre rapport.
+
+Ensuite utilisez la commande la commande \textit{git diff}. Cette commande permet d'afficher toutes les modifications apportées au project depuis le dernier commit. Voici un exemple de sortit possible
+
+\begin{verbatim}
+diff --git a/src/Symfony/Components/Yaml/Yaml.php b/src/Symfony/Components/Yaml/
+index fa0b806..77f9902 100644
+--- a/src/Symfony/Components/Yaml/Yaml.php
++++ b/src/Symfony/Components/Yaml/Yaml.php
+@@ -19,7 +19,7 @@ namespace Symfony\Components\Yaml;
+  */
+ class Yaml
+ {
+-    static protected $spec = ’1.2’;
++    static protected $spec = ’1.3’;
+
+     /**
+      * Sets the YAML specification version to use.
+@@ -33,6 +33,8 @@ class Yaml
+         if (!in_array($version, array(’1.1’, ’1.2’))) {
+             throw new \InvalidArgumentException(sprintf(’Version %s of the YAML
+         }
++
++        $mtsource = $version;
+
+         self::$spec = $version;
+     }
+\end{verbatim}
+
+Les lignes commençant par + indiquent un ajout. Les lignes commençant par - indiquent un suppression.
+
+Une fois que vous êtes satisfait de vos modifications \textbf{et que vous êtes sûr qu'elles fonctionnent}, il faut les committé pour les valider de façon définitive.
+
+Il y a trois façon de faire
+
+\begin{itemize}
+\item \emph{git add fichier1 fichier2 etc} puis \emph{git commit}, comme vu précédemment 
+\item \emph{git commit fichier1 fichier 2 etc}, c'est équivalent à la commande précédente en plus condensé
+\item \emph{git commit -a}, commit tous les fichiers modifiés
+\end{itemize}
+
+Ensuite, on retrouve la procédure vue précédemment, le message de commit à saisir, etc.
 \end{document}
