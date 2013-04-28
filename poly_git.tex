@@ -214,7 +214,7 @@ Les lignes commençant par + indiquent un ajout. Les lignes commençant par - in
 
 Une fois que vous êtes satisfait de vos modifications \textbf{et que vous êtes sûr qu'elles fonctionnent}, il faut les committé pour les valider de façon définitive.
 
-Il y a trois façon de faire
+Il y a trois façons de faire
 
 \begin{itemize}
 \item \emph{git add fichier1 fichier2 etc} puis \emph{git commit}, comme vu précédemment 
@@ -223,4 +223,123 @@ Il y a trois façon de faire
 \end{itemize}
 
 Ensuite, on retrouve la procédure vue précédemment, le message de commit à saisir, etc.
+
+\subsection{Commandes utiles}
+
+Voici une liste de quelques commandes utiles qui vous sauveront surement plus d'une fois la vie.
+
+\subsubsection{Modifier un commit}
+
+En cas de problème suite à un commit il est toujours possible de le modifier, voire de l'annuler.
+
+\paragraph{Modifier le message de commit :}Pour modifier le message du dernier commit, on peut utiliser la commande:
+\begin{verbatim}
+git commit --amend
+\end{verbatim}
+L'éditeur de texte s'ouvrira permettant de modifier le message de commit.
+
+\paragraph{Annuler un commit}Pour annuler un commit avec la méthode douce, c'est-à-dire sans perdre les modifications effectués, on utilise la commande
+
+\begin{verbatim}
+git reset HEAD^
+\end{verbatim}
+Ce qui fera revenir le dépot à l'avant dernier commit sans perdre aucune modifications.
+
+HEAD désigne le dernier commit, HEAD\^{} l'avant dernier, HEAD-2 l'avant avant dernier, etc.
+
+La méthode forte annule le commit + les changements effectués. (\textbf{Cette commande est irréversible !})
+
+\begin{verbatim}
+git reset --hard HEAD^
+\end{verbatim}
+
+\paragraph{Astuce : Annuler les changement non commités} En utilisant la commande précédente, il est possible d'annuler les changements non committés
+
+\begin{verbatim}
+git reset --hard HEAD
+\end{verbatim}
+
+\paragraph{Annuler les changements apportés à un fichier non committé} Pour faire ça, la commande est différente :
+
+\begin{verbatim}
+git checkout fichier
+\end{verbatim}
+
+\subsubsection{Contrôler qui à fait quoi}
+
+Ces commandes ne trouveront par forcement leur utilité dans le cadre d'un projet personnel, mais elles deviennent vite indispensable quand le projet englobe plusieurs personnes.
+
+\paragraph{Qui a modifier cette ligne ?} Pour répondre à cette question, il y a la commande \emph{git blame}
+
+\begin{verbatim}
+git blame poly_git.tex
+
+Résultat
+
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100   1) \documentclass[a4paper]{article}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100   2) 
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100   3) \usepackage[utf8]{inputenc}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100   4) \usepackage[T1]{fontenc}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100   5) \usepackage[francais]{babel}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100   6) \usepackage[top=2cm,bottom=2cm,left=3cm,right=2cm]{geometry}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100   7) \usepackage{setspace}
+60814e0e (Eryldor           2013-03-30 18:46:52 +0100   8) \usepackage{graphicx}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100   9) 
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  10) \title{Introduction à Git et à GitHub}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  11) \author{Antoine \bsc{Wacheux}}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  12) \date{30 mars 2013}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  13) 
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  14) \onehalfspace
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  15) 
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  16) \begin{document}
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  17) 
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  18) \maketitle
+aa6631b0 (Eryldor           2013-03-30 12:50:33 +0100  19) 
+...
+\end{verbatim}
+
+Vous obtenez le hash du dernier commit (aa6631b0), l'auteur (Eryldor), la date (2013-03-30 12:50:33) et la ligne modifiée.
+
+\paragraph{Quelles sont les dernier commits ?}
+
+La aussi, une commande permet de retracer l'historique des commits : \emph{git log}
+
+\begin{verbatim}
+git log
+
+Résultat
+
+commit 0671bc8e48d0c2369cb04d504519e7380354f7e5
+Author: Eryldor <eryldor.dev@gmail.com>
+Date:   Sun Apr 28 14:34:51 2013 +0200
+
+    Ajoute la partie sur la création de commit
+
+commit 60814e0ee585d286c47282d902d462ff023a1355
+Author: Eryldor <eryldor.dev@gmail.com>
+Date:   Sat Mar 30 18:46:52 2013 +0100
+
+    Ajoute la partie sur le fonctionnement global de git
+
+commit 63efd91bf9b3b35bcf5ea0f823548d5ef5706191
+Author: Eryldor <eryldor.dev@gmail.com>
+Date:   Sat Mar 30 13:26:13 2013 +0100
+
+    Section historique
+
+commit aa6631b021d8699a6bf56a84d12cf1346ca1e2f1
+Author: Eryldor <eryldor.dev@gmail.com>
+Date:   Sat Mar 30 12:50:33 2013 +0100
+
+    Ajoute le fichier LaTeX du poly
+
+commit 004b61fc9901b58f3786ddc90c95d8f992d49b44
+Author: Shiroy <wacant@free.fr>
+Date:   Sat Mar 30 03:43:31 2013 -0700
+
+    Initial commit
+\end{verbatim}
+
+Là aussi vous obtenez, la date, l'auteur, le hash avec en plus le message de commit.
+
 \end{document}
