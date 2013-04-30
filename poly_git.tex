@@ -342,4 +342,77 @@ Date:   Sat Mar 30 03:43:31 2013 -0700
 
 Là aussi vous obtenez, la date, l'auteur, le hash avec en plus le message de commit.
 
+\part{Travaillez à plusieurs, utilisez GitHub !}
+
+\section{Présentation}
+
+GitHub est un service web d'hébergement de source et de gestion de développement logiciel se basant sur Git. Ce site propose des comptes gratuits pour l'hébergement de logiciel libre et des comptes payant pour des dépôts privés\footnote{On peut également héberger des dépots privés gratuitement en utilisant un autre site web appelé Bitbucket}
+GitHub propose en plus de l'hébergement plusieurs services : 
+\begin{itemize}
+\item Un suivi complet des dépôts par le site
+\item Un bugtracker
+\item Un système de wiki
+\item Un système similaire à pastebin, nommé Gist
+\end{itemize}
+
+Parmi les projets hébergé su ce site, on peut cité:
+\begin{itemize}
+\item Tous les projets informatiques de FabLabUTC\footnote{https://github.com/FabLabUTC}
+\item PayUTC \footnote{https://github.com/payutc}
+\item Le portail des assos de l'UTC \footnote{https://github.com/simde-utc/portail}
+\item Beaucoup d'autres projets libres.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[scale=0.6]{accueil_github.png}
+\label{Page d'accueil de GitHub}
+\caption{Page d'accueil de GitHub}
+\end{figure}
+
+A présent, nous allons héberger notre rapport sur GitHub. Si vous n'avez pas de compte, créez vous en un, sinon connectez vous.
+
+\section{Création d'un dépôt GitHub}
+
+La création du dépôt se fait de manière assez intuitive, il y a un bouton \og New repository \fg sur lequel il suffit de cliquer.
+
+\paragraph{Note : }Si vous avez un dépôt à mettre en ligne, créer un dépôt vide sans l'initialiser. Sinon vous pouvez cocher la case \og Initialize this repository with a README  \fg, ce qui créera un dépôt pré-fait avec un README et un .gitignore.
+
+\begin{figure}
+\includegraphics[scale=0.6]{creation_depot.png}
+\caption{Création du dép\^ot rapport}
+\end{figure}
+
+Une fois créer, vous obtenez un écran ressemblant à la figure ci-dessous. En haut dans la barre du cadre \og Quick setup \fg se trouve l'adresse du dépôt qui va permettre à Git de s'y connecter pour faire la mise en ligne.
+
+Maintenant, il faut indiquer à Git cette fameuse adresse. Il faut ajouter un remote.
+
+\paragraph{Les remotes :}Un remote représente un ordinateur distant hébergeant le même dépôt que le votre. C'est ce système qui permet de complètement décentraliser Git. Cependant, on s'arrange en général pour tout centraliser sur un seul serveur car c'est beaucoup plus simple à gérer.
+
+\paragraph{Ajout du remote GitHub} L'ajout se fait grâce à la commande :
+
+\begin{verbatim}
+git remote add <nom_remote> <url_remote>
+\end{verbatim}
+
+Le paramètre \emph{nom\_remote} indique un nom en local que vous utiliser pour identifier le remote dans votre liste. Par convention on  appelle le remote du serveur distant \textit{origin}. Ce qui nous donne donc.
+
+\begin{verbatim}
+git remote add origin <url_indiquée_par_GitHub>
+\end{verbatim}
+
+La dernière étape est de pousser les modifications sur le dépôt. En gros de les uploader. Pareil la commande est encore très simple.
+
+\begin{verbatim}
+git push -u origin master
+\end{verbatim}
+
+Vous reconnaissez ici origin, le nom de notre remote. Master désigne la branche à pousser (nous n'aborderons pas le concept de branche faute de temps). L'option -u permet de lier la branche master d'origin à la branche master locale, ainsi toutes modifications faites sur le serveur se répercutera automatiquement sur le dépôt local (ce qui parfois n'est pas forcement une bonne chose :) )
+
+La commande qui fait l'inverse, c'est-à-dire qui récupère les données depuis le serveur est
+\begin{verbatim}
+git pull
+\end{verbatim}
+
+Ainsi en vous échangeant les adresse des dépôts (et en donnant les bon accès) vous pouvez travaillez à plusieurs sur un même projet sans prise de tête. Git se chargera de tout fusionné correctement et en cas de problème (conflit il vous demandera quoi faire).
+
 \end{document}
